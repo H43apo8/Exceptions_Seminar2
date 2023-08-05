@@ -1,23 +1,24 @@
-/*
-Разработайте программу, которая выбросит Exception, когда пользователь вводит пустую строку.
-Пользователю должно показаться сообщение, что пустые строки вводить нельзя.
-*/
 import java.util.Scanner;
 
-public class program4 {
-    public static void main(String[] args) {
-        String uString = null;
-        try{
-            Scanner in = new Scanner(System.in);
-            System.out.print("Введите строку: ");
-            uString =  in.nextLine();
-            if(uString == ""){
-                throw new RuntimeException();
-            }
-        } catch (RuntimeException e){
-            System.out.println("Пустая строка недопустима");
-        }
-        System.out.println("Вы ввели: " + uString);
+public class EmptyStringExceptionExample {
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("Введите текст: "); // Приглашение к вводу текста
+            String input = scanner.nextLine(); // Считываем введенную строку с помощью Scanner
+
+            // Проверяем, является ли введенная строка пустой, используя метод isEmpty() класса String
+            if (input.isEmpty()) {
+                throw new Exception("Пустые строки вводить нельзя!"); // Если строка пустая, выбрасываем исключение с сообщением
+            }
+
+            System.out.println("Вы ввели: " + input); // Выводим введенный текст на экран
+
+        } catch (Exception e) {
+            // Обработка исключения
+            System.out.println("Ошибка: " + e.getMessage()); // Выводим сообщение об ошибке
+        }
     }
 }
