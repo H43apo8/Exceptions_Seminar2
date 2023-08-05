@@ -1,33 +1,29 @@
-/*
-Дан следующий код, исправьте его там, где требуется (задание 3 https://docs.google.com/document/d/17EaA1lDxzD5YigQ5OAal60fOFKVoCbEJqooB9XfhT7w/edit)
-Решение:
-Добавим исключение деления на ноль - ArithmeticException - это более точно, нежели просто Exception.
-Заменим Throwable на Exception, т.к. Throwable я вляется родителем не только для Exception, но и для Error,
-а Error разрулить в try-catch невозможно.
-В методе printSum исключение FileNotFoundException  не нужно, т.к. в нём вообще не работаем с файлами.
-Ну и оставим всё же Exception, на случай непредвиденных исключений.
-*/
-public class program3 {
+import java.io.FileNotFoundException;
+
+public class ExceptionHandlingExample {
+
     public static void main(String[] args) {
         try {
             int a = 90;
             int b = 3;
-            System.out.println(a / b);
-            printSum(23, 234);
-            int[] abc = { 1, 2};
-            abc[3] = 9;
-        } catch(ArithmeticException e){
-            System.out.println("Деление ноль невозможно!!!");
+            System.out.println(a / b); // Печатаем результат деления a на b (30)
+            printSum(23, 234); // Вызываем метод printSum с аргументами 23 и 234
+            int[] abc = {1, 2};
+            abc[3] = 9; // Пытаемся обратиться к элементу массива с индексом 3, что приведет к IndexOutOfBoundsException
         } catch (NullPointerException ex) {
+            // Обработка исключения типа NullPointerException
             System.out.println("Указатель не может указывать на null!");
         } catch (IndexOutOfBoundsException ex) {
+            // Обработка исключения типа IndexOutOfBoundsException
             System.out.println("Массив выходит за пределы своего размера!");
-        } catch (Exception ex) {
+        } catch (Throwable ex) {
+            // Обработка всех остальных исключений, которые не попали в предыдущие блоки catch
             System.out.println("Что-то пошло не так...");
         }
     }
-    public static void printSum(Integer a, Integer b) {
+
+    public static void printSum(Integer a, Integer b) throws FileNotFoundException {
+        // Метод, который принимает два аргумента типа Integer и печатает их сумму
         System.out.println(a + b);
     }
-
 }
